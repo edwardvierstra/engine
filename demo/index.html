@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2D Physics Engine Demo</title>
+  <style>
+    canvas { background: #222; display: block; margin: 0 auto; }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="600" height="400"></canvas>
+  <script type="module">
+    import { Body, World } from '../src/index.js';
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const world = new World(100); // Strong gravity for demo
+    const ball1 = new Body(150, 50, 20, 1);
+    const ball2 = new Body(250, 50, 20, 1);
+    ball1.vx = 50;
+    ball2.vx = -50;
+    world.addBody(ball1);
+    world.addBody(ball2);
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const body of world.bodies) {
+        ctx.beginPath();
+        ctx.arc(body.x, body.y, body.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#0ff';
+        ctx.fill();
+        ctx.strokeStyle = '#fff';
+        ctx.stroke();
+      }
+    }
+
+    function animate() {
+      world.update(0.016);
+      draw();
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>
