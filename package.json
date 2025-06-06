@@ -1,0 +1,9 @@
+{
+  "name": "2d-physics-engine",
+  "version": "1.0.0",
+  "description": "A minimal 2D physics engine in JavaScript.",
+  "main": "src/index.js",
+  "scripts": {},
+  "author": "",
+  "license": "MIT"
+}
